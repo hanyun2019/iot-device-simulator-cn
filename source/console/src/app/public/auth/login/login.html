@@ -37,10 +37,10 @@
             <div id="signin-form-wrap" class="form-wrap show">
                 <h4 class="my-5 text-uppercase" style="font-weight:300; color:#fff;">Sign In to your account</h4>
                 <form id="signin-form" class="form" action="#">
-                    <div class="form-group">
+                    <div class="form-group" hidden=true>
                         <input type="text" class="form-control" placeholder="Your email" style="" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden=true>
                         <input type="password" class="form-control" placeholder="Your password" style="" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
                     </div>
                     <input (click)="onLogin()" type="submit" class="btn btn-outline-success py-2 mt-5" style="width: 200px" value="Sign in">

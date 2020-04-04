@@ -7,7 +7,8 @@ import { CognitoUtil } from './cognito.service';
 import { environment } from '../../environments/environment';
 import { DeviceService } from './device.service';
 import * as moment from 'moment';
-declare var AWS: any;
+import * as AWS from 'aws-sdk';
+//declare var AWS: any;
 
 
 @Injectable()

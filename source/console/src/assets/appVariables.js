@@ -18,13 +18,10 @@
 'use strict';
 
 const appVariables = {
-    USER_POOL_ID: '',
-    USER_POOL_CLIENT_ID: '',
-    IDENTITY_POOL_ID: '',
-    COGNITO_IDP_ENDPOINT: '',
-    COGNITO_IDENTITY_ENDPOINT: '',
-    PRINCIPAL_POLICY: '',
-    IOT_ENDPOINT: '',
-    APIG_ENDPOINT: '',
-    REGION: ''
+IOT_ENDPOINT: 'aj8l8x9dxn5d9.ats.iot.cn-north-1.amazonaws.com.cn', 
+COGNITO_IDP_ENDPOINT: '', 
+COGNITO_IDENTITY_ENDPOINT: '', 
+APIG_ENDPOINT: 'https://jb1shrlfia.execute-api.cn-north-1.amazonaws.com.cn/prod', 
+PRINCIPAL_POLICY: 't4-IotDeviceSimPrincipalPolicy-7PGYDQL8JBT3', 
+REGION: 'cn-north-1'
 };

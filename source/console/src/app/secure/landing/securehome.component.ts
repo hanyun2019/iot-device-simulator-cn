@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { DeviceService } from '../../service/device.service';
 import { LoggerService } from '../../service/logger.service';
+import * as AWS from 'aws-sdk';
+
 declare let jquery: any;
 declare let $: any;
 declare let _: any;
@@ -30,7 +32,8 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
         protected localStorage: AsyncLocalStorage,
         private logger: LoggerService) {
         this.logger.info('SecureHomeComponent: checking if user is authenticated');
-        this.isAdminUser = false;
+        //this.isAdminUser = false;
+        this.isAdminUser = true;
         this.loadedProfile = false;
 
         const _deviceStats = {
@@ -39,22 +42,27 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
         };
         this.localStorage.setItem('deviceStats', _deviceStats).subscribe(() => { });
 
-        const _self = this;
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            if (profile) {
-                _self.logger.info('SecureHomeComponent: profile exists, issuing no request profile');
-                _self.profile = new ProfileInfo(profile);
-                _self.isAdminUser = _self.profile.isAdmin();
-                _self.userService.isAuthenticated(_self, false);
-            } else {
-                _self.logger.info('SecureHomeComponent: no profile found, requesting profile');
-                _self.loadedProfile = true;
-                _self.userService.isAuthenticated(_self, true);
-            }
-        });
+        // const _self = this;
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     if (profile) {
+        //         _self.logger.info('SecureHomeComponent: profile exists, issuing no request profile');
+        //         _self.profile = new ProfileInfo(profile);
+        //         _self.isAdminUser = _self.profile.isAdmin();
+        //         _self.userService.isAuthenticated(_self, false);
+        //     } else {
+        //         _self.logger.info('SecureHomeComponent: no profile found, requesting profile');
+        //         _self.loadedProfile = true;
+        //         _self.userService.isAuthenticated(_self, true);
+        //     }
+        // });
     }
 
     ngOnInit() {
+        AWS.config.getCredentials( function(err) {
+            console.log('credential:')
+            console.log(AWS.config.credentials.accessKeyId);
+            console.log(AWS.config.credentials.secretAccessKey);
+          })
 
         this.prepUI();
 
