@@ -162,7 +162,7 @@ export class UserLoginService {
 
     logout() {
         this.logger.info('UserLoginService: Logging out');
-        this.cognitoUtil.getCurrentUser().signOut();
+        //this.cognitoUtil.getCurrentUser().signOut();
     }
 
     isAuthenticated(callback: LoggedInCallback, loadProfile: boolean) {

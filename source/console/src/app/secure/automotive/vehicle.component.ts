@@ -88,15 +88,21 @@ export class VehicleComponent implements OnInit, OnDestroy { // implements Logge
         });
         this.statsService.refresh();
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.loadDevice();
+        //     this.createMap();
+        //     this.createGuages();
+        //     this.pollerInterval = setInterval(function() {
+        //         _self.loadDevice();
+        //     }, environment.refreshInterval);
+        // });
+        _self.loadDevice();
+        this.createMap();
+        this.createGuages();
+        this.pollerInterval = setInterval(function() {
             _self.loadDevice();
-            this.createMap();
-            this.createGuages();
-            this.pollerInterval = setInterval(function() {
-                _self.loadDevice();
-            }, environment.refreshInterval);
-        });
+        }, environment.refreshInterval);
     }
 
     ngOnDestroy() {
@@ -115,11 +121,13 @@ export class VehicleComponent implements OnInit, OnDestroy { // implements Logge
                     this.mqttService.subscribe(`${_self.deviceType.spec.dataTopic}/${_self.device.metadata.vin}`);
                     // * listen to the MQTT stream
                     _self.mqttService.messageObservable$.subscribe(message => {
+                        console.log("Subscribed got message" + message.content.name);
                         if (message.topic.startsWith(`${_self.deviceType.spec.dataTopic}/${_self.device.metadata.vin}`)) {
                             if (_self.messages.length > 100) {
                                 _self.messages.pop();
                             }
                             _self.messages.unshift(message);
+                            console.log('UpdateGagues: ' + message.content);
                             _self.updateGauges(message);
                             _self._ngZone.run(() => { });
                         }
@@ -255,6 +263,7 @@ export class VehicleComponent implements OnInit, OnDestroy { // implements Logge
             this.telematics.oil_temp = message.content.value;
             this.oil_gauge.set(this.telematics.oil_temp);
         } else if (message.content.name === 'engine_speed') {
+            console.log('Engine speed: ' + message.content.value);
             this.telematics.engine_speed = message.content.value;
             this.rpm_gauge.set(this.telematics.engine_speed);
         } else if (message.content.name === 'transmission_gear_position') {
@@ -282,19 +291,23 @@ export class VehicleComponent implements OnInit, OnDestroy { // implements Logge
 
 
     createMap() {
-        if (this.profile.mapboxToken === '') {
-            this.invalidMapboxToken = true;
-            return;
-        }
+        // if (this.profile.mapboxToken === '') {
+        //     this.invalidMapboxToken = true;
+        //     return;
+        // }
 
+        this.invalidMapboxToken = false;
         const _self = this;
-        mapboxgl.accessToken = this.profile.mapboxToken; // 'pk.eyJ1IjoiYW16bnNiIiwiYSI6ImNqMDN2ZGlveDBjcXoyd3AzNjM0YmpqeDQifQ.LGPO_wlElLvOJax3TO5aLQ';
+        //mapboxgl.accessToken = this.profile.mapboxToken; // 'pk.eyJ1IjoiYW16bnNiIiwiYSI6ImNqMDN2ZGlveDBjcXoyd3AzNjM0YmpqeDQifQ.LGPO_wlElLvOJax3TO5aLQ';
+        console.log('Start create map')
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2h1bmh1YXYiLCJhIjoiY2s2OHo3ZzZhMDB6azNtbjNkeWZwYjQ4dSJ9.nDe4XAnrFvF-CZT7Cbq1Vg';
         this.map = new mapboxgl.Map({
             container: 'map', // container id
             style: 'mapbox://styles/mapbox/bright-v9', // stylesheet location
             center: [this.telematics.longitude, this.telematics.latitude], // starting position [lng, lat]
             zoom: 14 // starting zoom
         });
+        console.log('Finish create map. ' + this.map)
 
         this.map.on('error', function(err: any) {
             _self.logger.error('mapbox gl error');

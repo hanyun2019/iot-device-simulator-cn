@@ -42,22 +42,31 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
         };
         this.localStorage.setItem('deviceStats', _deviceStats).subscribe(() => { });
 
-        // const _self = this;
-        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-        //     if (profile) {
-        //         _self.logger.info('SecureHomeComponent: profile exists, issuing no request profile');
-        //         _self.profile = new ProfileInfo(profile);
-        //         _self.isAdminUser = _self.profile.isAdmin();
-        //         _self.userService.isAuthenticated(_self, false);
-        //     } else {
-        //         _self.logger.info('SecureHomeComponent: no profile found, requesting profile');
-        //         _self.loadedProfile = true;
-        //         _self.userService.isAuthenticated(_self, true);
-        //     }
-        // });
+        const _self = this;
+        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+            if (profile) {
+                _self.logger.info('SecureHomeComponent: profile exists, issuing no request profile');
+                _self.profile = new ProfileInfo(profile);
+                _self.isAdminUser = _self.profile.isAdmin();
+                //_self.userService.isAuthenticated(_self, false);
+            } else {
+                _self.logger.info('SecureHomeComponent: no profile found, requesting profile');
+                _self.loadedProfile = true;
+                const newprofile = {
+                    enabled: true,
+                    groups: ['Administrators'],
+                    mapboxToken : ''
+                }
+                _self.profile = new ProfileInfo(newprofile);
+                this.localStorage.setItem('profile', _self.profile);
+                this.isAdminUser = this.profile.isAdmin();
+                //_self.userService.isAuthenticated(_self, true);
+            }
+        });
     }
 
     ngOnInit() {
+        console.log('Securehome Init')
         AWS.config.getCredentials( function(err) {
             console.log('credential:')
             console.log(AWS.config.credentials.accessKeyId);

@@ -25,46 +25,81 @@ export class DeviceService {
         const _self = this;
 
         const promise = new Promise((resolve, reject) => {
-            this.cognito.getIdToken({
-                callback() {
+            // this.cognito.getIdToken({
+            //     callback() {
+            //     },
+            //     callbackWithParam(token: any) {
+            //         _self.logger.info(token);
+            //         let pg = 0;
+            //         if (page) {
+            //             pg = page;
+            //         }
+
+            //         let path = `widgets?page=${pg}&op=list`;
+            //         if (filter) {
+            //             path = `${path}&filter=${encodeURI(JSON.stringify(filter))}`;
+            //         }
+            //         console.log(path);
+
+            //         _self.http
+            //             .get<any>([appVariables.APIG_ENDPOINT, 'devices', path].join('/'), {
+            //                 headers: new HttpHeaders().set('Authorization', token)
+            //             })
+            //             .toPromise()
+            //             .then((data: any) => {
+            //                 let devices: Device[] = [];
+            //                 devices = data.map((device) => new Device(device));
+            //                 resolve(devices);
+            //             },
+            //             (err: HttpErrorResponse) => {
+            //                 if (err.error instanceof Error) {
+            //                     // A client-side or network error occurred.
+            //                     _self.logger.error('An error occurred:', err.error.message);
+            //                 } else {
+            //                     // The backend returned an unsuccessful response code.
+            //                     // The response body may contain clues as to what went wrong,
+            //                     _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
+            //                 }
+            //                 reject(err);
+            //             }
+            //             );
+            //     }
+            // });
+            let pg = 0;
+            if (page) {
+                pg = page;
+            }
+            let path = `widgets?page=${pg}&op=list`;
+            if (filter) {
+                path = `${path}&filter=${encodeURI(JSON.stringify(filter))}`;
+            }
+            console.log(path);
+
+            const id_token = localStorage.getItem('id_token')
+            console.log('GET HTTP request to API GW with id_token ' + id_token)
+
+            _self.http
+                .get<any>([appVariables.APIG_ENDPOINT, 'devices', path].join('/'), {
+                    headers: new HttpHeaders().set('Authorization', id_token)
+                })
+                .toPromise()
+                .then((data: any) => {
+                    let devices: Device[] = [];
+                    devices = data.map((device) => new Device(device));
+                    resolve(devices);
                 },
-                callbackWithParam(token: any) {
-                    _self.logger.info(token);
-                    let pg = 0;
-                    if (page) {
-                        pg = page;
+                (err: HttpErrorResponse) => {
+                    if (err.error instanceof Error) {
+                        // A client-side or network error occurred.
+                        _self.logger.error('An error occurred:', err.error.message);
+                    } else {
+                        // The backend returned an unsuccessful response code.
+                        // The response body may contain clues as to what went wrong,
+                        _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
                     }
+                    reject(err);
+                });
 
-                    let path = `widgets?page=${pg}&op=list`;
-                    if (filter) {
-                        path = `${path}&filter=${encodeURI(JSON.stringify(filter))}`;
-                    }
-                    console.log(path);
-
-                    _self.http
-                        .get<any>([appVariables.APIG_ENDPOINT, 'devices', path].join('/'), {
-                            headers: new HttpHeaders().set('Authorization', token)
-                        })
-                        .toPromise()
-                        .then((data: any) => {
-                            let devices: Device[] = [];
-                            devices = data.map((device) => new Device(device));
-                            resolve(devices);
-                        },
-                        (err: HttpErrorResponse) => {
-                            if (err.error instanceof Error) {
-                                // A client-side or network error occurred.
-                                _self.logger.error('An error occurred:', err.error.message);
-                            } else {
-                                // The backend returned an unsuccessful response code.
-                                // The response body may contain clues as to what went wrong,
-                                _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
-                            }
-                            reject(err);
-                        }
-                        );
-                }
-            });
         });
 
         return promise;
@@ -432,7 +467,8 @@ export class DeviceService {
                 .post<any>([appVariables.APIG_ENDPOINT, 'devices',  path].join('/'),  {
                     typeId: widget.typeId,
                     metadata: widget.metadata,
-                    count: widget.count,
+                    count: widget.count
+                }, {
                     headers: new HttpHeaders().set('Authorization', id_token)
                 })
                 .toPromise()

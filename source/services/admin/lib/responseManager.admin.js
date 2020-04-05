@@ -69,6 +69,8 @@ class ResponseManager {
      */
     static _processRequest(event, ticket) {
 
+        console.log('Ticket: ' + ticket);
+        
         let INVALID_PATH_ERR = {
             error: 'InvalidAction',
             message: `Invalid path request ${event.resource}, ${event.httpMethod}`
@@ -168,7 +170,7 @@ class ResponseManager {
                     _response = this._buildOutput(401, INVALID_OP_ERR);
                     resolve(_response);
                 }
-            } else if (event.resource === '/admin/settings' && event.httpMethod === 'GET' && isAdmin) {
+            } else if (event.resource === '/admin/settings' && event.httpMethod === 'GET' && isAdmin) { //
                 _operation = `list ${event.queryStringParameters.id} settings`;
                 Logger.log(Logger.levels.INFO, ['Attempting to', _operation].join(' '));
                 _setting.getAppSettings(event.queryStringParameters.id).then((data) => {

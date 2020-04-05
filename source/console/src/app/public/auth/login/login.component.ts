@@ -68,8 +68,8 @@ export class LoginComponent implements CognitoCallback, OnInit { // LoggedInCall
         if (authorization_code) {
             console.log('Get authorization code: ' + authorization_code);
             this.exchangeToken(authorization_code);
-            console.log('Get token')
-            //console.log(AWS.config.credentials);
+            console.log('Save logout url')
+            localStorage.setItem('logout_url', this.authing_oidc_logout_url)
         }
         else {
             console.log('no code!');
@@ -108,10 +108,11 @@ export class LoginComponent implements CognitoCallback, OnInit { // LoggedInCall
         }
     }
 
-    //Get id_token
+    //Get id_token and other user information
     authingCallback(id_token: string) {
         console.log("authing Callback: " + id_token);
         localStorage.setItem('id_token', id_token)
+        
 
         //Get AWS credentail
         AWS.config.region = 'cn-north-1'; // Region

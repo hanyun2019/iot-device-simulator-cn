@@ -84,7 +84,7 @@ class Auth {
                     auth_status_reason : 'User is a valid entity from Authing',
                     userid : '',
                     user_enabled : true,
-                    groups : 'Authing'
+                    groups : [ 'Administrators' ]
                 }
 
                 if (expired) {

@@ -46,12 +46,14 @@ export class SettingsComponent implements OnInit { // implements LoggedInCallbac
 
         this.blockUI.start('Loading settings...');
 
+    
         const _self = this;
         this.statsService.statObservable$.subscribe(message => {
             this.deviceStats = message;
             this._ngZone.run(() => { });
         });
 
+        console.log('get profile');
         this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
             _self.profile = new ProfileInfo(profile);
             _self.isAdminUser = _self.profile.isAdmin();
@@ -62,6 +64,7 @@ export class SettingsComponent implements OnInit { // implements LoggedInCallbac
 
     loadAllSettings() {
         const _self = this;
+        console.log('loadallsetting...');
         if (this.profile.isAdmin()) {
             this.loadGeneralSettings().then((data) => {
                 _self.loadEngineSettings().then((data2) => {

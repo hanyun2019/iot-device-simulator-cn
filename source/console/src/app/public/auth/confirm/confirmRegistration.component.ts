@@ -18,9 +18,12 @@ export class LogoutComponent implements OnInit {
 
     ngOnInit() {
         console.log('logging out and clearing local storage');
+        
+        //this.userService.logout();
+        let logout_url = localStorage.getItem('logout_url');
+        location.href = logout_url
+        //this.router.navigate(['/home/login']);
         this.localStorage.clear().subscribe(() => { });
-        this.userService.logout();
-        this.router.navigate(['/home/login']);
     }
 
 }

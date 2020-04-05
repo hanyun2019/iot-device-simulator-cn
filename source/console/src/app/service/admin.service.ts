@@ -333,33 +333,58 @@ export class AdminService {
         const promise = new Promise((resolve, reject) => {
             const path = `settings?id=${settingId}`;
 
-            this.cognito.getIdToken({
-                callback() {
+            // this.cognito.getIdToken({
+            //     callback() {
+            //     },
+            //     callbackWithParam(token: any) {
+            //         _self.http
+            //             .get<any>([appVariables.APIG_ENDPOINT, 'admin', path].join('/'), {
+            //                 headers: new HttpHeaders().set('Authorization', token)
+            //             })
+            //             .toPromise()
+            //             .then((data) => {
+            //                 let setting = new Setting(data);
+            //                 resolve(setting);
+            //             },
+            //             (err: HttpErrorResponse) => {
+            //                 if (err.error instanceof Error) {
+            //                     // A client-side or network error occurred.
+            //                     _self.logger.error('An error occurred:', err.error.message);
+            //                 } else {
+            //                     // The backend returned an unsuccessful response code.
+            //                     // The response body may contain clues as to what went wrong,
+            //                     _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
+            //                 }
+            //                 reject(err);
+            //             }
+            //             );
+            //     }
+            // });
+            const id_token = localStorage.getItem('id_token')
+            console.log('GET HTTP request to API GW with id_token ' + id_token)
+
+            _self.http
+                .get<any>([appVariables.APIG_ENDPOINT, 'admin', path].join('/'), {
+                    headers: new HttpHeaders().set('Authorization', id_token)
+                })
+                .toPromise()
+                .then((data: any) => {
+                    console.log('GET API GW success: admin/' + path)
+                    let setting = new Setting(data);
+                    resolve(setting);
                 },
-                callbackWithParam(token: any) {
-                    _self.http
-                        .get<any>([appVariables.APIG_ENDPOINT, 'admin', path].join('/'), {
-                            headers: new HttpHeaders().set('Authorization', token)
-                        })
-                        .toPromise()
-                        .then((data) => {
-                            let setting = new Setting(data);
-                            resolve(setting);
-                        },
-                        (err: HttpErrorResponse) => {
-                            if (err.error instanceof Error) {
-                                // A client-side or network error occurred.
-                                _self.logger.error('An error occurred:', err.error.message);
-                            } else {
-                                // The backend returned an unsuccessful response code.
-                                // The response body may contain clues as to what went wrong,
-                                _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
-                            }
-                            reject(err);
-                        }
-                        );
-                }
-            });
+                (err: HttpErrorResponse) => {
+                    if (err.error instanceof Error) {
+                        // A client-side or network error occurred.
+                        _self.logger.error('An error occurred:', err.error.message);
+                    } else {
+                        // The backend returned an unsuccessful response code.
+                        // The response body may contain clues as to what went wrong,
+                        _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
+                    }
+                    reject(err);
+                });
+
         });
 
         return promise;
@@ -369,31 +394,56 @@ export class AdminService {
         const _self = this;
 
         const promise = new Promise((resolve, reject) => {
-            this.cognito.getIdToken({
-                callback() {
+            // this.cognito.getIdToken({
+            //     callback() {
+            //     },
+            //     callbackWithParam(token: any) {
+            //         _self.http
+            //             .put<any>([appVariables.APIG_ENDPOINT, 'admin', 'settings'].join('/'), setting, {
+            //                 headers: new HttpHeaders().set('Authorization', token)
+            //             })
+            //             .toPromise()
+            //             .then((data: any) => {
+            //                 resolve(data);
+            //             },
+            //             (err: HttpErrorResponse) => {
+            //                 if (err.error instanceof Error) {
+            //                     // A client-side or network error occurred.
+            //                     _self.logger.error('An error occurred:', err.error.message);
+            //                 } else {
+            //                     // The backend returned an unsuccessful response code.
+            //                     // The response body may contain clues as to what went wrong,
+            //                     _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
+            //                 }
+            //                 reject(err);
+            //             });
+            //     }
+            // });
+            const id_token = localStorage.getItem('id_token')
+            const path = 'settings'
+            console.log('GET HTTP request to API GW with id_token ' + id_token)
+
+            _self.http
+                .put<any>([appVariables.APIG_ENDPOINT, 'admin', path].join('/'),setting,  {
+                    headers: new HttpHeaders().set('Authorization', id_token)
+                })
+                .toPromise()
+                .then((data: any) => {
+                    console.log('PUT API GW success: admin/' + path)
+                    resolve(data);
                 },
-                callbackWithParam(token: any) {
-                    _self.http
-                        .put<any>([appVariables.APIG_ENDPOINT, 'admin', 'settings'].join('/'), setting, {
-                            headers: new HttpHeaders().set('Authorization', token)
-                        })
-                        .toPromise()
-                        .then((data: any) => {
-                            resolve(data);
-                        },
-                        (err: HttpErrorResponse) => {
-                            if (err.error instanceof Error) {
-                                // A client-side or network error occurred.
-                                _self.logger.error('An error occurred:', err.error.message);
-                            } else {
-                                // The backend returned an unsuccessful response code.
-                                // The response body may contain clues as to what went wrong,
-                                _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
-                            }
-                            reject(err);
-                        });
-                }
-            });
+                (err: HttpErrorResponse) => {
+                    if (err.error instanceof Error) {
+                        // A client-side or network error occurred.
+                        _self.logger.error('An error occurred:', err.error.message);
+                    } else {
+                        // The backend returned an unsuccessful response code.
+                        // The response body may contain clues as to what went wrong,
+                        _self.logger.error(`Backend returned code ${err.status}, body was: ${err.error}`);
+                    }
+                    reject(err);
+                });
+
         });
 
         return promise;

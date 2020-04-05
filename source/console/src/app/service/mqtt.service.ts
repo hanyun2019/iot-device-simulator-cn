@@ -61,15 +61,25 @@ export class MQTTService {
         });
 
         const _self = this;
-        this.cognito.getIdToken({
-            callback() {
-            },
-            callbackWithParam(token: any) {
-                let params = _self.cognito.buildCognitoCredParams(token);
-                AWS.config.credentials = new AWS.CognitoIdentityCredentials(params);
-                _self.connect();
+        // this.cognito.getIdToken({
+        //     callback() {
+        //     },
+        //     callbackWithParam(token: any) {
+        //         let params = _self.cognito.buildCognitoCredParams(token);
+        //         AWS.config.credentials = new AWS.CognitoIdentityCredentials(params);
+        //         _self.connect();
+        //     }
+        // });
+        const id_token = localStorage.getItem('id_token')
+        console.log('Get AWS credential ' + id_token)
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: "cn-north-1:5c5ebc51-84d9-4782-b9c7-58b09581147a",
+            Logins: {
+               'iotds-cn.authing.cn/oauth/oidc': id_token
             }
         });
+        console.log('MQTT client connect')
+        _self.connect();
     }
 
     connect() {
@@ -91,6 +101,7 @@ export class MQTTService {
                             AWS.config.credentials.secretAccessKey,
                             AWS.config.credentials.sessionToken);
                   });
+                console.log('IoT client created')
 
             } else {
                 self.logger.error('error retrieving identity:' + err);
