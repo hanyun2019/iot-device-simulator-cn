@@ -56,14 +56,19 @@ export class MyDevicesComponent implements OnInit { // implements LoggedInCallba
             this._ngZone.run(() => { });
         });
 
+        console.log('Get Profile')
         this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+            console.log('new Profile');
             _self.profile = new ProfileInfo(profile);
             _self.loadDevices();
         });
+        _self.loadDevices();
+        console.log('Completed Get Profile')
 
     }
 
     loadDevices() {
+        console.log('Start to load Devices')
         this.deviceService.getDeviceStats('').then((data: any) => {
             this.metrics = data;
             this.pages.total = Math.ceil(data.total / this.pages.pageSize);

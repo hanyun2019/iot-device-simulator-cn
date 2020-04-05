@@ -62,14 +62,17 @@ export class WidgetComponent implements OnInit, OnDestroy { // implements Logged
         });
         this.statsService.refresh();
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.loadDevice();
+        //     this.pollerInterval = setInterval(function() {
+        //         _self.loadDevice();
+        //     }, environment.refreshInterval);
+        // });
+        _self.loadDevice();
+        this.pollerInterval = setInterval(function() {
             _self.loadDevice();
-            this.pollerInterval = setInterval(function() {
-                _self.loadDevice();
-            }, environment.refreshInterval);
-        });
-
+        }, environment.refreshInterval);
     }
 
     ngOnDestroy() {

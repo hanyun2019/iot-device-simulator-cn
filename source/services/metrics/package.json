@@ -6,11 +6,12 @@
     "version": "2.1.1",
     "private": "true",
     "dependencies": {
+        "authorizer": "file:../../resources/authorizer/",
+        "jose": "^1.25.0",
+        "logger": "file:../../resources/logger/",
         "moment": "*",
         "randomstring": "*",
-        "underscore": "*",
-        "authorizer": "file:../../resources/authorizer/",
-        "logger": "file:../../resources/logger/"
+        "underscore": "*"
     },
     "devDependencies": {
         "aws-sdk": "*",

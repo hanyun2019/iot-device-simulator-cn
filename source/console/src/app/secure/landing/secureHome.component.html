@@ -54,15 +54,15 @@
                                 <li>
                                     <div class="dw-user-box">
                                         <div class="u-img" style="text-align:center;font-size:50px;"><i class="fa fa-user-circle"></i></div>
-                                        <div class="u-text">
+                                        <div class="u-text" hidden=true>
                                             <h4>{{profile.name}}</h4>
-                                            <p class="text-muted">{{profile.email}}</p><a href="securehome/profile" class="btn btn-rounded btn-danger btn-sm"><i class="mdi mdi-account-card-details"></i> View Profile</a></div>
+                                            <p class="text-muted" >{{profile.email}}</p><a href="securehome/profile" class="btn btn-rounded btn-danger btn-sm"><i class="mdi mdi-account-card-details"></i> View Profile</a></div>
                                     </div>
                                 </li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="securehome/devices"><i class="mdi mdi-view-module"></i> My Devices</a></li>
+                                <li><a href="securehome/devices"><i class="mdi mdi-view-module"></i> 我的设备</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a [routerLink]="['/securehome/logout']"><i class="fa fa-power-off"></i> Logout</a></li>
+                                <li><a [routerLink]="['/securehome/logout']"><i class="fa fa-power-off"></i> 退出登陆</a></li>
                             </ul>
                         </div>
                     </li>
@@ -83,34 +83,34 @@
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
                     <li>
-                        <a class="waves-effect waves-dark" data-caption="Home" href="securehome"><i class="mdi mdi-home"></i><span class="hide-menu">Home </span></a>
+                        <a class="waves-effect waves-dark" data-caption="Home" href="securehome"><i class="mdi mdi-home"></i><span class="hide-menu">首页 </span></a>
                     </li>
-                    <li class="nav-small-cap">MY MENU</li>
+                    <li class="nav-small-cap">我的菜单</li>
                     <li>
-                        <a class="waves-effect waves-dark" data-caption="My Dashboard" href="securehome/dashboard"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard </span></a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-dark" href="securehome/devices"><i class="mdi mdi-view-module"></i><span class="hide-menu">My Devices </span></a>
+                        <a class="waves-effect waves-dark" data-caption="My Dashboard" href="securehome/dashboard"><i class="mdi mdi-gauge"></i><span class="hide-menu">仪表盘</span></a>
                     </li>
                     <li>
+                        <a class="waves-effect waves-dark" href="securehome/devices"><i class="mdi mdi-view-module"></i><span class="hide-menu">我的设备</span></a>
+                    </li>
+                    <li hidden=true>
                         <a class="waves-effect waves-dark"  href="securehome/profile"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">My Profile </span></a>
                     </li>
-                    <li class="nav-small-cap">MODULES</li>
+                    <li class="nav-small-cap">模块</li>
                     <li>
-                        <a class="waves-effect waves-dark" href="securehome/types"><i class="mdi mdi-file-xml"></i><span class="hide-menu">Device Types </span></a>
+                        <a class="waves-effect waves-dark" href="securehome/types"><i class="mdi mdi-file-xml"></i><span class="hide-menu">设备类型 </span></a>
                     </li>                    
                     <li>
-                        <a class="waves-effect waves-dark" href="securehome/general"><i class="mdi mdi-chip"></i><span class="hide-menu">Widgets </span></a>
+                        <a class="waves-effect waves-dark" href="securehome/general"><i class="mdi mdi-chip"></i><span class="hide-menu">虚拟设备 </span></a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" href="securehome/automotive"><i class="mdi mdi-car-connected"></i><span class="hide-menu">Automotive </span></a>
+                        <a class="waves-effect waves-dark" href="securehome/automotive"><i class="mdi mdi-car-connected"></i><span class="hide-menu">汽车 </span></a>
                     </li>
-                    <li class="nav-small-cap" *ngIf="isAdminUser">ADMINISTRATION</li>
-                    <li *ngIf="isAdminUser">
+                    <li class="nav-small-cap" *ngIf="isAdminUser">管理</li>
+                    <li *ngIf="isAdminUser" hidden=true>
                         <a class="waves-effect waves-dark" href="securehome/admin/users"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Users </span></a>
                     </li>
                     <li *ngIf="isAdminUser">
-                        <a class="waves-effect waves-dark" href="securehome/admin/settings"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings </span></a>
+                        <a class="waves-effect waves-dark" href="securehome/admin/settings"><i class="mdi mdi-settings"></i><span class="hide-menu">设置 </span></a>
                     </li>
                 </ul>
             </nav>

@@ -57,6 +57,7 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
                     groups: ['Administrators'],
                     mapboxToken : ''
                 }
+                console.log('create new profile and save to local storage')
                 _self.profile = new ProfileInfo(newprofile);
                 this.localStorage.setItem('profile', _self.profile);
                 this.isAdminUser = this.profile.isAdmin();
@@ -67,11 +68,11 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
 
     ngOnInit() {
         console.log('Securehome Init')
-        AWS.config.getCredentials( function(err) {
-            console.log('credential:')
-            console.log(AWS.config.credentials.accessKeyId);
-            console.log(AWS.config.credentials.secretAccessKey);
-          })
+        // AWS.config.getCredentials( function(err) {
+        //     console.log('credential:')
+        //     console.log(AWS.config.credentials.accessKeyId);
+        //     console.log(AWS.config.credentials.secretAccessKey);
+        //   })
 
         this.prepUI();
 

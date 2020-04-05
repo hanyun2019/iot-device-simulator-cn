@@ -56,10 +56,11 @@ export class DeviceTypesComponent implements OnInit { // implements LoggedInCall
             this._ngZone.run(() => { });
         });
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
-            _self.loadDeviceTypes();
-        });
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.loadDeviceTypes();
+        // });
+        _self.loadDeviceTypes();
 
     }
 

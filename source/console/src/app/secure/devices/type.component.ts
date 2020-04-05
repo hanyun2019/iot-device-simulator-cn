@@ -82,16 +82,19 @@ export class DeviceTypeComponent implements OnInit {
         });
         this.statsService.refresh();
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            console.log(profile)
-            this.profile = new ProfileInfo(profile);
-            if (this.typeId !== 'new') {
-                _self.loadDeviceType();
-            } else {
-                this.readOnly = false;
-                this.blockUI.stop();
-            }
-        });
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     console.log(profile)
+        //     this.profile = new ProfileInfo(profile);
+        //     if (this.typeId !== 'new') {
+        //         _self.loadDeviceType();
+        //     } else {
+        //         this.readOnly = false;
+        //         this.blockUI.stop();
+        //     }
+        // });
+        console.log('start load device type')
+        _self.loadDeviceType();
+        this.blockUI.stop();
     }
 
     loadDeviceType() {

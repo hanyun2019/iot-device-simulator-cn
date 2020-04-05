@@ -71,13 +71,17 @@ export class FleetComponent implements OnInit, OnDestroy {
             this._ngZone.run(() => { });
         });
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.loadDevices();
+        //     this.pollerInterval = setInterval(function() {
+        //         _self.loadDevices();
+        //     }, environment.refreshInterval);
+        // });
+        _self.loadDevices();
+        this.pollerInterval = setInterval(function() {
             _self.loadDevices();
-            this.pollerInterval = setInterval(function() {
-                _self.loadDevices();
-            }, environment.refreshInterval);
-        });
+        }, environment.refreshInterval);
 
     }
 

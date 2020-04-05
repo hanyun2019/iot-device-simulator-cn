@@ -52,10 +52,11 @@ export class CustomizeAutomotiveComponent implements OnInit {
         });
         this.statsService.refresh();
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
-            _self.loadAutomotiveConfiguration();
-        });
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.loadAutomotiveConfiguration();
+        // });
+        _self.loadAutomotiveConfiguration();
     }
 
     loadAutomotiveConfiguration() {

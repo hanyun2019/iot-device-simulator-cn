@@ -80,10 +80,11 @@ export class DashboardComponent implements OnInit {
         });
         this.statsService.refresh();
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
-            this.loadDashboardMetrics();
-        });
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     this.loadDashboardMetrics();
+        // });
+        this.loadDashboardMetrics();
     }
 
     loadDashboardMetrics() {

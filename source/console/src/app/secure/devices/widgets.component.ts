@@ -73,14 +73,19 @@ export class WidgetsComponent implements OnInit, OnDestroy { // implements Logge
             this._ngZone.run(() => { });
         });
 
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
-            _self.loadFilterTypes();
-            _self.loadDevices();
-            this.pollerInterval = setInterval(function() {
-                //_self.loadDevices();
-            }, environment.refreshInterval);
-        });
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.loadFilterTypes();
+        //     _self.loadDevices();
+        //     this.pollerInterval = setInterval(function() {
+        //         //_self.loadDevices();
+        //     }, environment.refreshInterval);
+        // });
+        _self.loadFilterTypes();
+        _self.loadDevices();
+        this.pollerInterval = setInterval(function() {
+            //_self.loadDevices();
+        }, environment.refreshInterval);
 
     }
 
