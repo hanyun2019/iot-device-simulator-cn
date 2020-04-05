@@ -92,6 +92,7 @@ export class MQTTService {
                 self.logger.info(AWS.config.credentials);
                 self.logger.info('retrieved identity: ' + AWS.config.credentials.identityId);
                 
+                //attachPrincipalPolicy
                 new IotClient({ region: appVariables.REGION }).attachPrincipalPolicy({ policyName: appVariables.PRINCIPAL_POLICY, principal: AWS.config.credentials.identityId }, function (err, data) {
                     if (err) {
                             console.error(err); // an error occurred

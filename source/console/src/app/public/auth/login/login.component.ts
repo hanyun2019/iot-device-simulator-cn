@@ -112,7 +112,6 @@ export class LoginComponent implements CognitoCallback, OnInit { // LoggedInCall
     authingCallback(id_token: string) {
         console.log("authing Callback: " + id_token);
         localStorage.setItem('id_token', id_token)
-        
 
         //Get AWS credentail
         AWS.config.region = 'cn-north-1'; // Region

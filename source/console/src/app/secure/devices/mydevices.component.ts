@@ -57,11 +57,11 @@ export class MyDevicesComponent implements OnInit { // implements LoggedInCallba
         });
 
         console.log('Get Profile')
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            console.log('new Profile');
-            _self.profile = new ProfileInfo(profile);
-            _self.loadDevices();
-        });
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     console.log('new Profile');
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.loadDevices();
+        // });
         _self.loadDevices();
         console.log('Completed Get Profile')
 
