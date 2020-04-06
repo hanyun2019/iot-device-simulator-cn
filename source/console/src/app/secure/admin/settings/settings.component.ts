@@ -161,4 +161,8 @@ export class SettingsComponent implements OnInit { // implements LoggedInCallbac
         });
     }
 
+    cancel() {
+        this.router.navigate(['/securehome']);
+    }
+
 }
