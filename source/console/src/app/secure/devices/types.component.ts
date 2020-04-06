@@ -20,7 +20,7 @@ declare var swal: any;
 })
 export class DeviceTypesComponent implements OnInit { // implements LoggedInCallback {
 
-    public title: string = 'Device Types';
+    public title: string = '设备类型';
     public deviceStats: any = {};
     private profile: ProfileInfo;
     public deviceTypes: DeviceType[] = [];

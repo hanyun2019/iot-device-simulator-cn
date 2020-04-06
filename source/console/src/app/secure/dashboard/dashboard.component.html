@@ -5,21 +5,21 @@
     <div class="col-md-5 col-8 align-self-center">
         <h3 id="view-title">{{title}}</h3>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/securehome">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
+            <li class="breadcrumb-item"><a href="/securehome">首页</a></li>
+            <li class="breadcrumb-item active">仪表板</li>
         </ol>
     </div>
     <div class="col-md-7 col-4 align-self-center">
         <div class="d-flex m-t-10 justify-content-end">
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Devices</small></h6>
-                    <h4 class="m-t-0 text-success">{{deviceStats.total}} total</h4></div>
+                    <h6 class="m-b-0"><small>设备</small></h6>
+                    <h4 class="m-t-0 text-success">总数: {{deviceStats.total}}</h4></div>
             </div>
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Simulations</small></h6>
-                    <h4 class="m-t-0 text-success-alt">{{deviceStats.simulations}} running</h4></div>
+                    <h6 class="m-b-0"><small>仿真</small></h6>
+                    <h4 class="m-t-0 text-success-alt">运行中: {{deviceStats.simulations}}</h4></div>
             </div>
         </div>
     </div>
@@ -36,12 +36,12 @@
                     <div class="m-r-20 align-self-center">
                         <h1 class="text-white"><i class="mdi mdi-av-timer"></i></h1></div>
                     <div>
-                        <h3 class="card-title">Total Simulations</h3>
+                        <h3 class="card-title">仿真</h3>
                         <h6 class="card-subtitle">{{reportMonth}}</h6> </div>
                 </div>
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h2 class="font-light text-white">{{reportMonthSims}} runs</h2>
+                        <h2 class="font-light text-white">{{reportMonthSims}} 次</h2>
                     </div>
                     <div class="col-7 p-t-10 p-b-20 align-self-center">
                         <div class="usage chartist-chart" style="height:65px"></div>
@@ -55,12 +55,12 @@
                     <div class="m-r-20 align-self-center">
                         <h1 class="text-white"><i class="mdi mdi-clock-fast"></i></h1></div>
                     <div>
-                        <h3 class="card-title">Total Simulation Minutes</h3>
+                        <h3 class="card-title">总仿真时间</h3>
                         <h6 class="card-subtitle">{{reportMonth}}</h6> </div>
                 </div>
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h2 class="font-light text-white">{{reportMonthHrs}} min</h2>
+                        <h2 class="font-light text-white">{{reportMonthHrs}} 分钟</h2>
                     </div>
                     <div class="col-7 p-t-10 p-b-20 text-right">
                         <div class="spark-count" style="height:65px"></div>
@@ -72,7 +72,7 @@
     <div class="col-lg-4 col-md-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Simulation Runs</h3>
+                <h3 class="card-title">仿真</h3>
                 <h6 class="card-subtitle">{{reportMonth}}</h6>
                 <div id="runs" style="height:260px; width:100%;"></div>
             </div>
@@ -82,7 +82,7 @@
             <div class="card-body text-center ">
                 <ul class="list-inline m-b-0">
                     <li>
-                        <h6 class="text-muted">{{simulations.types}} total device types used</h6>
+                        <h6 class="text-muted">共使用 {{simulations.types}} 设备类型</h6>
                     </li>
                 </ul>
             </div>
@@ -91,7 +91,7 @@
     <div class="col-lg-4 col-md-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Device Breakdown</h3>
+                <h3 class="card-title">设备分类</h3>
                 <h6 class="card-subtitle">{{reportMonth}}</h6>
                 <table class="table browser m-t-30 no-border" style="margin-bottom:0px;">
                     <tbody>
@@ -102,7 +102,7 @@
                         </tr>
                         <tr>
                             <!-- <td style="width:40px"><span class="round round-light-grey"><i class="mdi mdi-car text-normal"></i></span></td> -->
-                            <td colspan="2" style="font-weight:800">Total Devices</td>
+                            <td colspan="2" style="font-weight:800">设备总数</td>
                             <td class="text-right"><span class="label label-light-success-alt">{{deviceCounts.total}}</span></td>
                         </tr>
                     </tbody>
@@ -119,7 +119,7 @@
             <div class="row">
                 <div class="col-lg-9 col-md-7">
                     <div class="card-body">
-                        <h3>My simulation minutes (last 6 months)</h3>
+                        <h3>我的仿真运行时间(分钟): 过去6个月</h3>
                         <h6 class="card-subtitle">{{reportDate}}</h6>
                         <div class="demo-container" style="height:400px;">
                             <div class="sim-hours" style="height: 400px;"></div>
@@ -129,16 +129,16 @@
                 <div class="col-lg-3 col-md-5 b-l p-l-0">
                     <div class="m-t-30 m-b-40 p-t-20 p-b-20 text-center">
                         <font class="display-3">{{simulations.total}}</font>
-                        <h6 class="text-muted">Total Simulation Minutes</h6>
-                        <a class="btn btn-success" href="securehome/devices">View My Devices</a>
+                        <h6 class="text-muted">总共仿真运行时间(分钟)</h6>
+                        <a class="btn btn-success" href="securehome/devices">查看我的设备</a>
                     </div>
                     <hr>
                     <div class="card-body">
                         <div class="row">
                             <!-- Column -->
                             <div class="col p-r-0">
-                                <h1 class="font-light">{{simulations.auto}}<span style="font-size:20px;">min</span></h1>
-                                <h6 class="text-muted">Automotive</h6></div>
+                                <h1 class="font-light">{{simulations.auto}}<span style="font-size:20px;">分钟</span></h1>
+                                <h6 class="text-muted">汽车</h6></div>
                             <!-- Column -->
                             <div class="col text-right align-self-center">
                                 <div class="round align-self-center round-info"><i class="mdi mdi-car" style="font-size:2em;"></i></div>
@@ -150,8 +150,8 @@
                         <div class="row">
                             <!-- Column -->
                             <div class="col p-r-0">
-                                <h1 class="font-light">{{simulations.generic}}<span style="font-size:20px;">min</span></h1>
-                                <h6 class="text-muted">Generic</h6></div>
+                                <h1 class="font-light">{{simulations.generic}}<span style="font-size:20px;">分钟</span></h1>
+                                <h6 class="text-muted">通用设备</h6></div>
                                 <!-- Column -->
                                 <div class="col text-right align-self-center">
                                     <div class="round align-self-center round-success"><i class="mdi mdi-chip" style="font-size:2em;"></i></div>

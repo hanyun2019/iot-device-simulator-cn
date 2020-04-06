@@ -5,8 +5,8 @@
     <div class="col-md-5 col-8 align-self-center">
         <h3 id="view-title">{{title}}</h3>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/securehome">Home</a></li>
-            <li class="breadcrumb-item"><a href="/securehome/general">Widgets</a></li>
+            <li class="breadcrumb-item"><a href="/securehome">首页</a></li>
+            <li class="breadcrumb-item"><a href="/securehome/general">通用设备</a></li>
             <li class="breadcrumb-item active">{{deviceId}}</li>
         </ol>
     </div>
@@ -14,13 +14,13 @@
         <div class="d-flex m-t-10 justify-content-end">
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Devices</small></h6>
-                    <h4 class="m-t-0 text-success">{{deviceStats.total}} total</h4></div>
+                    <h6 class="m-b-0"><small>设备</small></h6>
+                    <h4 class="m-t-0 text-success">总数 {{deviceStats.total}} </h4></div>
             </div>
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Simulations</small></h6>
-                    <h4 class="m-t-0 text-success-alt">{{deviceStats.simulations}} running</h4></div>
+                    <h6 class="m-b-0"><small>仿真</small></h6>
+                    <h4 class="m-t-0 text-success-alt">运行中 {{deviceStats.simulations}} </h4></div>
             </div>
         </div>
     </div>
@@ -35,19 +35,19 @@
         <div class="card card-outline-info">
             <div class="card-body">
                 <div class="pull-right" role="group">
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Start Simulation" *ngIf="device.stage === 'sleeping'"  (click)="startDevice()"><i class="mdi mdi-play"></i> Start</button>
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Stop Simulation" *ngIf="device.stage === 'hydrated'" (click)="stopDevice()"><i class="mdi mdi-stop"></i> Stop</button>
-                    <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete Widget" *ngIf="device.stage === 'sleeping'"  (click)="deleteDevice()"><i class="mdi mdi-delete-circle"></i> Delete</button>
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Refresh" (click)="refreshData()"><i class="fa fa-refresh"></i> Refresh</button>
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Start Simulation" *ngIf="device.stage === 'sleeping'"  (click)="startDevice()"><i class="mdi mdi-play"></i> 启动</button>
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Stop Simulation" *ngIf="device.stage === 'hydrated'" (click)="stopDevice()"><i class="mdi mdi-stop"></i> 停止</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete Widget" *ngIf="device.stage === 'sleeping'"  (click)="deleteDevice()"><i class="mdi mdi-delete-circle"></i> 删除</button>
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Refresh" (click)="refreshData()"><i class="fa fa-refresh"></i> 刷新</button>
                 </div>
                 <form class="form-horizontal" role="form">
                     <div class="form-body">
-                        <h3 class="box-title">Device Details</h3>
+                        <h3 class="box-title">设备详细信息</h3>
                         <hr class="m-t-0 m-b-40">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Device Type:</label>
+                                    <label class="control-label text-right col-md-3">设备类型:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static"><a href="/securehome/types/{{device.typeId}}">{{device.subCategory}} <i class="mdi mdi-link-variant"></i></a></p>
                                     </div>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Simulations:</label>
+                                    <label class="control-label text-right col-md-3">仿真运行次数:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{device.runs}}</p>
                                     </div>
@@ -65,7 +65,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Status:</label>
+                                    <label class="control-label text-right col-md-3">状态:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static"><span [class]="device.stage === 'hydrated' ? 'label label-light-success-alt' : (device.stage === 'provisioning' ? 'label label-light-primary' : (device.stage === 'stopping' ? 'label label-light-warning' : 'label label-light-danger'))">{{device.stage === 'hydrated' ? 'running' : device.stage}}</span></p>
                                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Last Sim:</label>
+                                    <label class="control-label text-right col-md-3">上次仿真结束时间:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{formatDate(device.endedAt)}}</p>
                                     </div>
@@ -83,7 +83,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Created At:</label>
+                                    <label class="control-label text-right col-md-3">创建时间:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{formatDate(device.createdAt)}}</p>
                                     </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Last Updated:</label>
+                                    <label class="control-label text-right col-md-3">上次更新时间:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{formatDate(device.updatedAt)}}</p>
                                     </div>
@@ -109,7 +109,7 @@
 <div class="row">
     <div *ngIf="subscribeMessage !== ''" class="col-lg-12" style="height:500px;">
         <div class="alert alert-info">
-            <h3 class="text-info"><i class="fa fa-exclamation-circle"></i> Topic Subscription</h3> {{subscribeMessage}}
+            <h3 class="text-info"><i class="fa fa-exclamation-circle"></i> 消息主题订阅</h3> {{subscribeMessage}}
         </div>
     </div>
     <div *ngIf="subscribeMessage === ''" class="col-lg-12">

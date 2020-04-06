@@ -5,21 +5,21 @@
     <div class="col-md-5 col-8 align-self-center">
         <h3 id="view-title">{{title}}</h3>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/securehome">Home</a></li>
-            <li class="breadcrumb-item">Devices</li>
+            <li class="breadcrumb-item"><a href="/securehome">首页</a></li>
+            <li class="breadcrumb-item">设备</li>
         </ol>
     </div>
     <div class="col-md-7 col-4 align-self-center">
         <div class="d-flex m-t-10 justify-content-end">
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Devices</small></h6>
-                    <h4 class="m-t-0 text-success">{{deviceStats.total}} total</h4></div>
+                    <h6 class="m-b-0"><small>设备</small></h6>
+                    <h4 class="m-t-0 text-success">总数: {{deviceStats.total}} </h4></div>
             </div>
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Simulations</small></h6>
-                    <h4 class="m-t-0 text-success-alt">{{deviceStats.simulations}} running</h4></div>
+                    <h6 class="m-b-0"><small>仿真</small></h6>
+                    <h4 class="m-t-0 text-success-alt">运行中: {{deviceStats.simulations}} </h4></div>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                     <div class="round round-lg align-self-center round-muted"><i class="mdi mdi-chip"></i></div>
                     <div class="m-l-10 align-self-center">
                         <h3 class="m-b-0 font-light">{{metrics.total}}</h3>
-                        <h5 class="text-muted m-b-0">My Total Devices</h5></div>
+                        <h5 class="text-muted m-b-0">我的所有设备</h5></div>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <div class="round round-lg align-self-center round-success-alt"><i class="mdi mdi-chip"></i></div>
                     <div class="m-l-10 align-self-center">
                         <h3 class="m-b-0 font-lgiht">{{metrics.hydrated}}</h3>
-                        <h5 class="text-muted m-b-0">Simulating</h5></div>
+                        <h5 class="text-muted m-b-0">仿真运行中</h5></div>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-chip"></i></div>
                     <div class="m-l-10 align-self-center">
                         <h3 class="m-b-0 font-lgiht">{{metrics.provisioning}}</h3>
-                        <h5 class="text-muted m-b-0">Provisioning</h5></div>
+                        <h5 class="text-muted m-b-0">部署中</h5></div>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                     <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-chip"></i></div>
                     <div class="m-l-10 align-self-center">
                         <h3 class="m-b-0 font-lgiht">{{metrics.sleeping}}</h3>
-                        <h5 class="text-muted m-b-0">Sleeping</h5></div>
+                        <h5 class="text-muted m-b-0">已停止</h5></div>
                 </div>
             </div>
         </div>
@@ -91,12 +91,12 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <button type="button" class="float-right btn btn-sm btn-success m-l-15" (click)="refreshData()"><i class="fa fa-refresh"></i> Refresh</button>
-                <h4 class="card-title">Devices <span *ngIf="devices.length > 0">({{((pages.current-1)*100) + 1}} - {{((pages.current-1)*100) + devices.length}})</span></h4>
+                <button type="button" class="float-right btn btn-sm btn-success m-l-15" (click)="refreshData()"><i class="fa fa-refresh"></i> 刷新</button>
+                <h4 class="card-title">设备 <span *ngIf="devices.length > 0">({{((pages.current-1)*100) + 1}} - {{((pages.current-1)*100) + devices.length}})</span></h4>
                 <div *ngIf="devices.length > 0" class="m-t-20 m-r-10">
                     <div class="pull-right">
                         <button type="button" [class]="pages.current === 0 ? 'btn btn-sm btn-default disabled' : 'btn btn-sm btn-default'" (click)="previousPage()" [disabled]="pages.current === 1"><i class="mdi mdi-chevron-left"></i></button>
-                        <span class="m-l-10 m-r-10">Page {{pages.current}} of {{pages.total}}</span>
+                        <span class="m-l-10 m-r-10">第 {{pages.current}} 页, 共 {{pages.total}} 页</span>
                         <button type="button" [class]="pages.current === (pages.total - 1) ? 'btn btn-sm btn-default disabled' : 'btn btn-sm btn-default'" (click)="nextPage()" [disabled]="pages.current === pages.total"><i class="mdi mdi-chevron-right"></i></button>
                     </div>
                 </div>
@@ -105,11 +105,11 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Device</th>
-                                <th class="text-right">Stage</th>
-                                <th class="text-right">Simulations</th>
-                                <th class="text-right">Created</th>
-                                <th class="text-right">Last Simulation</th>
+                                <th>设备</th>
+                                <th class="text-right">状态</th>
+                                <th class="text-right">仿真运行次数</th>
+                                <th class="text-right">创建时间</th>
+                                <th class="text-right">上次仿真运行时间</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -133,7 +133,7 @@
                                 <td class="text-right">{{formatDate(device.createdAt)}}</td>
                                 <td class="text-right">{{formatDate(device.lastRunAt)}}</td>
                                 <td>
-                                    <a class="pull-right btn btn-sm btn-success btn-rounded" [href]="device.category === 'automotive' ? '/securehome/automotive/vehicle/' + device.id : '/securehome/general/' + device.id "><i class="mdi mdi-information-outline"></i> View</a>
+                                    <a class="pull-right btn btn-sm btn-success btn-rounded" [href]="device.category === 'automotive' ? '/securehome/automotive/vehicle/' + device.id : '/securehome/general/' + device.id "><i class="mdi mdi-information-outline"></i> 查看</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -143,7 +143,7 @@
                                     <div class="text-right">
                                         <div class="pull-right">
                                             <button type="button" [class]="pages.current === 0 ? 'btn btn-sm btn-default disabled' : 'btn btn-sm btn-default'" (click)="previousPage()" [disabled]="pages.current === 1"><i class="mdi mdi-chevron-left"></i></button>
-                                            <span class="m-l-10 m-r-10">Page {{pages.current}} of {{pages.total}}</span>
+                                            <span class="m-l-10 m-r-10">第 {{pages.current}} 页, 共 {{pages.total}} 页</span>
                                             <button type="button" [class]="pages.current === (pages.total - 1) ? 'btn btn-sm btn-default disabled' : 'btn btn-sm btn-default'" (click)="nextPage()" [disabled]="pages.current === pages.total"><i class="mdi mdi-chevron-right"></i></button>
                                         </div>
                                     </div>

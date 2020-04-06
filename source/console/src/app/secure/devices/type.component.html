@@ -5,8 +5,8 @@
     <div class="col-md-5 col-8 align-self-center">
         <h3 id="view-title">{{title}}</h3>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/securehome">Home</a></li>
-            <li class="breadcrumb-item"><a href="/securehome/types">Device Types</a></li>
+            <li class="breadcrumb-item"><a href="/securehome">首页</a></li>
+            <li class="breadcrumb-item"><a href="/securehome/types">设备类型</a></li>
             <li class="breadcrumb-item active">{{typeId}}</li>
         </ol>
     </div>
@@ -14,13 +14,13 @@
         <div class="d-flex m-t-10 justify-content-end">
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Devices</small></h6>
+                    <h6 class="m-b-0"><small>设备</small></h6>
                     <h4 class="m-t-0 text-success">{{deviceStats.total}} total</h4></div>
             </div>
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Simulations</small></h6>
-                    <h4 class="m-t-0 text-success-alt">{{deviceStats.simulations}} running</h4></div>
+                    <h6 class="m-b-0"><small>仿真</small></h6>
+                    <h4 class="m-t-0 text-success-alt">{{deviceStats.simulations}} 运行中</h4></div>
             </div>
         </div>
     </div>
@@ -34,20 +34,20 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">
-                    <span>Device Type Definition</span>
+                    <span>设备类型定义</span>
                     <span style="text-transform: uppercase;" [class]="dtype.visibility === 'shared' ? 'label label-light-success-alt pull-right' : 'label label-light-danger pull-right'">{{dtype.visibility}}</span>
                     <span *ngIf="readOnly" style="text-transform: uppercase; margin-right: 10px;" class="label label-light-danger pull-right">READONLY</span>
                 </h4>
-                <h6 class="card-subtitle">Customize how device data of this customized type is sent to AWS IoT.</h6>
+                <h6 class="card-subtitle">定义设备的数据如何上传至AWS IoT.</h6>
                 <form class="fm-t-40">
                     <div class="form-group">
-                        <label>Device Type Name</label>
+                        <label>设备类型名称</label>
                         <input type="text" class="form-control form-control-line" name="typename" id="typename" #typename="ngModel" [(ngModel)]="dtype.name" required ngModel [readonly]="this.typeId !== 'new'" />
                         <div class="form-control-feedback">
-                            <small>The common name of the device type.</small>
+                            <small>设备类型的名称</small>
                         </div>
                     </div>
-                    <div class="form-group" *ngIf="!readOnly">
+                    <div class="form-group" *ngIf="!readOnly" hidden=true>
                         <label for="visibility" class="form-control-label">Visibility:</label>
                         <select class="custom-select col-12" name="visibility" id="visibility" #visibility="ngModel" [(ngModel)]="dtype.visibility" required ngModel [disabled]="dtype.visibility === 'shared'">
                             <option value="private">PRIVATE</option>
@@ -58,30 +58,30 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Data Topic</label>
+                        <label>消息主题</label>
                         <input type="text" class="form-control form-control-line" name="topic" id="topic" #topic="ngModel" [(ngModel)]="dtype.spec.topic" required ngModel [readonly]="readOnly" />
                         <div class="form-control-feedback">
-                            <small>The topic where individual sensor data is sent.</small>
+                            <small>数据上传的IoT消息主题</small>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Data Transmission Duration</label>
+                        <label>数据传输时长</label>
                         <input type="number" class="form-control form-control-line" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="duration" id="duration" #duration="ngModel" [(ngModel)]="dtype.spec.duration" required ngModel [readonly]="readOnly" />
                         <div class="form-control-feedback">
-                            <small>How long the device will simulate sending data to the defined data topic (milliseconds) [must be >= 60000].</small>
+                            <small>指定设备在一次仿真运行中发送数据至IoT消息主题的时长(毫秒)[需要大于60000].</small>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Data Transmission Interval</label>
+                        <label>数据传输间隔</label>
                         <input type="number" class="form-control form-control-line" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="interval" id="interval" #interval="ngModel" [(ngModel)]="dtype.spec.interval" required ngModel [readonly]="readOnly" />
                         <div class="form-control-feedback">
-                            <small>How often devices will send data during a simulation (milliseconds) [must be >= 1000].</small>
+                            <small>指定设备在一次仿真运行中发送数据的间隔时间(毫秒)[需要大于1000].</small>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label style='margin-bottom:1px;'>Message Payload</label>
+                        <label style='margin-bottom:1px;'>消息负载</label>
                         <div class="form-control-feedback">
-                            <small>Define the message payload that will be simulated for the device.</small>
+                            <small>定义设备发送的消息负载的格式</small>
                         </div>
                         <!-- .modal -->
                         <div class="modal fade" id="attributeModal" tabindex="-1" role="dialog" aria-labelledby="attributeModalLabel1">
@@ -294,9 +294,9 @@
                         <!-- .modal -->
                         <div class="table-responsive m-t-20">
                             <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                                <div class="col-md-5 b-b" style="font-weight: 400;color: #99abb4; text-transform:uppercase; padding: .75rem;">Message Attribute</div>
-                                <div class="col-md-2 b-b" style="font-weight: 400;color: #99abb4; text-transform:uppercase; padding: .75rem;">Data Type</div>
-                                <div class="col-md-2 b-b" style="font-weight: 400;color: #99abb4; text-transform:uppercase; padding: .75rem;">Static Value</div>
+                                <div class="col-md-5 b-b" style="font-weight: 400;color: #99abb4; text-transform:uppercase; padding: .75rem;">消息属性</div>
+                                <div class="col-md-2 b-b" style="font-weight: 400;color: #99abb4; text-transform:uppercase; padding: .75rem;">数据类型</div>
+                                <div class="col-md-2 b-b" style="font-weight: 400;color: #99abb4; text-transform:uppercase; padding: .75rem;">静态数值</div>
                                 <div class="col-md-3 b-b" style="font-weight: 400;color: #99abb4; text-transform:uppercase; padding: .75rem; text-align: right; padding-right:30px;">Actions</div>
                             </div>
                             <div class="row" style="margin-left: 0px; margin-right: 0px;" *ngFor="let item of dtype.spec.payload">
@@ -305,9 +305,9 @@
                                 <div class="col-md-2 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">{{item.static}}</div>
                                 <div class="col-md-3 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">   
                                     <div class="pull-right" role="group">                                                         
-                                        <button *ngIf="item.type !== 'object'" type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(item._id_)"><i class="mdi mdi-information"></i> View Config</button>
-                                        <button *ngIf="item.type === 'object' && !readOnly" type="button" class="btn btn-success-alt btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="addSchemaAttribute(item, 1)"><i class="mdi mdi-plus"></i> Add Attribute</button>
-                                        <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(item._id_)"><i class="mdi mdi-delete-circle"></i> Remove</button>
+                                        <button *ngIf="item.type !== 'object'" type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(item._id_)"><i class="mdi mdi-information"></i> 查看配置</button>
+                                        <button *ngIf="item.type === 'object' && !readOnly" type="button" class="btn btn-success-alt btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="addSchemaAttribute(item, 1)"><i class="mdi mdi-plus"></i>增加属性</button>
+                                        <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(item._id_)"><i class="mdi mdi-delete-circle"></i> 删除</button>
                                     </div>
                                 </div>
                                 <div *ngIf="item.type === 'object'" class="col-md-12">
@@ -317,9 +317,9 @@
                                         <div class="col-md-2 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">{{i.static}}</div>
                                         <div class="col-md-3 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">   
                                             <div class="pull-right" role="group">                                                         
-                                                <button *ngIf="i.type !== 'object'" type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(i._id_)"><i class="mdi mdi-information"></i> View Config</button>
-                                                <button *ngIf="i.type === 'object' && !readOnly" type="button" class="btn btn-success-alt btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="addSchemaAttribute(i, 2)"><i class="mdi mdi-plus"></i> Add Attribute</button>
-                                                <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(i._id_)"><i class="mdi mdi-delete-circle"></i> Remove</button>
+                                                <button *ngIf="i.type !== 'object'" type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(i._id_)"><i class="mdi mdi-information"></i> 查看配置</button>
+                                                <button *ngIf="i.type === 'object' && !readOnly" type="button" class="btn btn-success-alt btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="addSchemaAttribute(i, 2)"><i class="mdi mdi-plus"></i> 增加属性</button>
+                                                <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(i._id_)"><i class="mdi mdi-delete-circle"></i> 删除</button>
                                             </div>
                                         </div>
                                         <div *ngIf="i.type === 'object'" class="col-md-12">
@@ -329,9 +329,9 @@
                                                 <div class="col-md-2 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">{{k.static}}</div>
                                                 <div class="col-md-3 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">   
                                                     <div class="pull-right" role="group">                                                         
-                                                        <button *ngIf="k.type !== 'object'" type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(k._id_)"><i class="mdi mdi-information"></i> View Config</button>
-                                                        <button *ngIf="k.type === 'object' && !readOnly" type="button" class="btn btn-success-alt btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="addSchemaAttribute(k, 3)"><i class="mdi mdi-plus"></i> Add Attribute</button>
-                                                        <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(k._id_)"><i class="mdi mdi-delete-circle"></i> Remove</button>
+                                                        <button *ngIf="k.type !== 'object'" type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(k._id_)"><i class="mdi mdi-information"></i> 查看配置</button>
+                                                        <button *ngIf="k.type === 'object' && !readOnly" type="button" class="btn btn-success-alt btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="addSchemaAttribute(k, 3)"><i class="mdi mdi-plus"></i> 增加属性</button>
+                                                        <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(k._id_)"><i class="mdi mdi-delete-circle"></i> 删除</button>
                                                     </div>
                                                 </div>
                                                 <div *ngIf="k.type === 'object'" class="col-md-12">
@@ -341,8 +341,8 @@
                                                         <div class="col-md-2 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">{{j.static}}</div>
                                                         <div class="col-md-3 b-b" style="font-weight: 400;color: #67757c; text-transform:uppercase; padding: .75rem;">   
                                                             <div class="pull-right" role="group">                                                         
-                                                                <button type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(j._id_)"><i class="mdi mdi-information"></i> View Config</button>
-                                                                <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(j._id_)"><i class="mdi mdi-delete-circle"></i> Remove</button>
+                                                                <button type="button" class="btn btn-success btn-sm m-r-15" data-toggle="tooltip" title="View Attribute" (click)="viewSchemaAttribute(j._id_)"><i class="mdi mdi-information"></i> 查看配置</button>
+                                                                <button *ngIf="!readOnly" type="button" class="btn btn-danger btn-sm m-r-15" data-toggle="tooltip" title="Delete Attribute" (click)="removeSchemaAttribute(j._id_)"><i class="mdi mdi-delete-circle"></i> 删除</button>
                                                             </div>
                                                         </div>
                                                     </div>                                                
@@ -353,15 +353,15 @@
                                 </div>
                             </div>
                         </div>
-                        <button *ngIf="!readOnly" type="button" class="btn btn-success btn-sm m-t-20" (click)="addSchemaAttribute(null, 0)" ><i class="mdi mdi-plus"></i> Add Attribute</button>
+                        <button *ngIf="!readOnly" type="button" class="btn btn-success btn-sm m-t-20" (click)="addSchemaAttribute(null, 0)" ><i class="mdi mdi-plus"></i> 增加属性</button>
                     </div>
                     <div>
-                        <label>Sample Message Payload</label>
+                        <label>示例消息负载</label>
                     </div>
                     <pre style="font-size: 14px;">{{getDataSample()}}</pre>
                     <div class="m-t-20 m-b-20">
-                        <button *ngIf="!readOnly" type="button" class="btn btn-success-alt btn-rounded m-r-15" (click)="saveDeviceType()">Save</button>
-                        <button type="button" class="btn btn-secondary btn-rounded" (click)="cancel()">Cancel</button>
+                        <button *ngIf="!readOnly" type="button" class="btn btn-success-alt btn-rounded m-r-15" (click)="saveDeviceType()">保存</button>
+                        <button type="button" class="btn btn-secondary btn-rounded" (click)="cancel()">取消</button>
                     </div>
                     <div *ngIf="hasError" class="alert alert-danger alert-rounded"> <i class="mdi mdi-exclamation"></i> {{errorMsg}}</div>
                 </form>

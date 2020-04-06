@@ -28,7 +28,7 @@ declare var Gauge: any;
 })
 export class VehicleComponent implements OnInit, OnDestroy { // implements LoggedInCallback {
 
-    public title: string = 'Vehicle Details';
+    public title: string = '车辆详细信息';
     public deviceStats: any = {};
     private profile: ProfileInfo;
     public vehicleId: string;

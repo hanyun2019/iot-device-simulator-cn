@@ -5,22 +5,22 @@
     <div class="col-md-5 col-8 align-self-center">
         <h3 id="view-title">{{title}}</h3>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/securehome">Home</a></li>
-            <li class="breadcrumb-item"><a href="/securehome/automotive">Fleet</a></li>
-            <li class="breadcrumb-item active">Vehicle</li>
+            <li class="breadcrumb-item"><a href="/securehome">首页</a></li>
+            <li class="breadcrumb-item"><a href="/securehome/automotive">车队</a></li>
+            <li class="breadcrumb-item active">车辆</li>
         </ol>
     </div>
     <div class="col-md-7 col-4 align-self-center">
         <div class="d-flex m-t-10 justify-content-end">
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Devices</small></h6>
-                    <h4 class="m-t-0 text-success">{{deviceStats.total}} total</h4></div>
+                    <h6 class="m-b-0"><small>设备</small></h6>
+                    <h4 class="m-t-0 text-success">总数 {{deviceStats.total}}</h4></div>
             </div>
             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                 <div class="chart-text m-r-10">
-                    <h6 class="m-b-0"><small>Simulations</small></h6>
-                    <h4 class="m-t-0 text-success-alt">{{deviceStats.simulations}} running</h4></div>
+                    <h6 class="m-b-0"><small>仿真</small></h6>
+                    <h4 class="m-t-0 text-success-alt">运行中 {{deviceStats.simulations}} </h4></div>
             </div>
         </div>
     </div>
@@ -35,12 +35,12 @@
             <div class="card-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-body">
-                        <h3 class="box-title">Vehicle Details
+                        <h3 class="box-title">车辆详细信息
                             <div class="pull-right" role="group">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Start Simulation" *ngIf="device.stage === 'sleeping'"  (click)="startDevice()"><i class="mdi mdi-play"></i> Start</button>
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Stop Simulation" *ngIf="device.stage === 'hydrated'" (click)="stopDevice()"><i class="mdi mdi-stop"></i> Stop</button>
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete Widget" *ngIf="device.stage === 'sleeping'"  (click)="deleteDevice()"><i class="mdi mdi-delete-circle"></i> Delete</button>
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Refresh" (click)="refreshData()"><i class="fa fa-refresh"></i> Refresh</button>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Start Simulation" *ngIf="device.stage === 'sleeping'"  (click)="startDevice()"><i class="mdi mdi-play"></i> 启动</button>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Stop Simulation" *ngIf="device.stage === 'hydrated'" (click)="stopDevice()"><i class="mdi mdi-stop"></i> 停止</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete Widget" *ngIf="device.stage === 'sleeping'"  (click)="deleteDevice()"><i class="mdi mdi-delete-circle"></i> 删除</button>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="Refresh" (click)="refreshData()"><i class="fa fa-refresh"></i> 刷新</button>
                             </div>
                         </h3>
                         <hr class="m-t-0 m-b-40">
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Simulations:</label>
+                                    <label class="control-label text-right col-md-3">仿真运行次数:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{device.runs}}</p>
                                     </div>
@@ -65,7 +65,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Status:</label>
+                                    <label class="control-label text-right col-md-3">状态:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static"><span [class]="device.stage === 'hydrated' ? 'label label-light-success-alt' : (device.stage === 'provisioning' ? 'label label-light-warning' : 'label label-light-danger')">{{device.stage === 'hydrated' ? 'running' : device.stage}}</span></p>
                                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Last Sim:</label>
+                                    <label class="control-label text-right col-md-3">上次仿真结束时间:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{formatDate(device.endedAt)}}</p>
                                     </div>
@@ -83,7 +83,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Created At:</label>
+                                    <label class="control-label text-right col-md-3">创建时间:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{formatDate(device.createdAt)}}</p>
                                     </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Last Updated:</label>
+                                    <label class="control-label text-right col-md-3">上次更新时间:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">{{formatDate(device.updatedAt)}}</p>
                                     </div>
@@ -124,7 +124,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">Throttle</h4>
+                <h4 class="text-center">节流阀</h4>
                 <div class="gaugejs-box">
                     <canvas id="throttle" class="gaugejs">guage</canvas>
                 </div>
@@ -139,7 +139,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">Speed</h4>
+                <h4 class="text-center">速度</h4>
                 <div class="gaugejs-box">
                     <canvas id="speed" class="gaugejs">guage</canvas>
                 </div>
@@ -154,7 +154,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">RPM</h4>
+                <h4 class="text-center">发动机转速</h4>
                 <div class="gaugejs-box">
                     <canvas id="rpm" class="gaugejs">guage</canvas>
                 </div>
@@ -169,7 +169,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">Oil</h4>
+                <h4 class="text-center">机油温度</h4>
                 <div class="gaugejs-box">
                     <canvas id="oil" class="gaugejs">guage</canvas>
                 </div>
@@ -191,7 +191,7 @@
                 <div class="row p-t-10 p-b-10">
                     <div class="col-12">
                         <h3>{{telematics.transmission_torque}} Nm</h3>
-                        <h6 class="card-subtitle">Transmission Torque</h6></div>
+                        <h6 class="card-subtitle">传递扭矩</h6></div>
                     <div class="col-12">
                         <div class="progress" style="height: 6px;">
                             <div id="torque" class="progress-bar bg-success" role="progressbar" style="height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -209,7 +209,7 @@
                 <div class="row p-t-10 p-b-10">
                     <div class="col-12">
                         <h3>{{telematics.fuel_level}} %</h3>
-                        <h6 class="card-subtitle">Fuel Level</h6></div>
+                        <h6 class="card-subtitle">汽油表</h6></div>
                     <div class="col-12">
                         <div class="progress" style="height: 6px;">
                             <div id="fuel" class="progress-bar bg-primary" role="progressbar" style="height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -227,7 +227,7 @@
                 <div class="row p-t-10 p-b-10">
                     <div class="col-12">
                         <h3>{{telematics.odometer}} Km</h3>
-                        <h6 class="card-subtitle">Odometer</h6></div>
+                        <h6 class="card-subtitle">行驶里程</h6></div>
                     <div class="col-12">
                         <div class="progress" style="height: 0px;">
                             <div class="progress-bar bg-primary" role="progressbar" style="height: 0px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -245,7 +245,7 @@
                 <div class="row p-t-10 p-b-10">
                     <div class="col-12">
                         <h3>{{telematics.gear}}</h3>
-                        <h6 class="card-subtitle">Transmission Gear</h6></div>
+                        <h6 class="card-subtitle">变速箱</h6></div>
                     <div class="col-12">
                         <div class="progress" style="height: 0px;">
                             <div class="progress-bar bg-primary" role="progressbar" style="height: 0px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>

@@ -27,7 +27,7 @@ declare var swal: any;
 export class DeviceTypeComponent implements OnInit {
 
     public typeId: string;
-    public title: string = 'Device Type';
+    public title: string = '设备类型';
     private sub: Subscription;
     public deviceStats: any = {};
     private profile: ProfileInfo;

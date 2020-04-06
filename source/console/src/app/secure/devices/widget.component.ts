@@ -24,7 +24,7 @@ declare var swal: any;
 })
 export class WidgetComponent implements OnInit, OnDestroy { // implements LoggedInCallback {
 
-    public title: string = 'Device Widget';
+    public title: string = '通用设备';
     public deviceId: string;
     public deviceStats: any = {};
     private profile: ProfileInfo;

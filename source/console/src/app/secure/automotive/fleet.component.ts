@@ -24,7 +24,7 @@ declare var mapboxgl: any;
 })
 export class FleetComponent implements OnInit, OnDestroy {
 
-    public title: string = 'My Automotive Fleet';
+    public title: string = '我的车队';
     public deviceStats: any = {};
     private profile: ProfileInfo;
     public fleet: Device[] = [];

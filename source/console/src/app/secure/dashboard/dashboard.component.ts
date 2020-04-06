@@ -26,7 +26,7 @@ declare var c3: any;
 export class DashboardComponent implements OnInit {
 
     public cognitoId: string;
-    public title: string = 'My Dashboard';
+    public title: string = '我的仪表板';
     private sub: Subscription;
     public deviceStats: any = {
         total: 0,
@@ -205,12 +205,12 @@ export class DashboardComponent implements OnInit {
                 label: {
                     show: false
                 },
-                title: 'Simulations',
+                title: '仿真',
                 width: 20,
 
             },
             legend: {
-                hide: true
+                hide: false
             },
             color: {
                 pattern: ['#745af2', '#26c6da', '#1e88e5', '#eceff1']
