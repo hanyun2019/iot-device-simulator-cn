@@ -92,9 +92,12 @@ export class DeviceTypeComponent implements OnInit {
         //         this.blockUI.stop();
         //     }
         // });
-        console.log('start load device type')
-        _self.loadDeviceType();
-        this.blockUI.stop();
+        if (this.typeId !== 'new') {
+            _self.loadDeviceType();
+        } else {
+            this.readOnly = false;
+            this.blockUI.stop();
+        }
     }
 
     loadDeviceType() {
@@ -103,9 +106,10 @@ export class DeviceTypeComponent implements OnInit {
             this.blockUI.stop();
             this.logger.info(type);
             this.dtype = new DeviceType(type);
-            if (this.dtype.userId === this.profile.user_id) {
-                this.readOnly = false;
-            }
+            // if (this.dtype.userId === this.profile.user_id) {
+            //     this.readOnly = false;
+            // }
+            this.readOnly = false;
         }).catch((err) => {
             this.blockUI.stop();
             swal(
