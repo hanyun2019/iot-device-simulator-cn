@@ -729,7 +729,7 @@ export class DeviceService {
             console.log('GET HTTP request to API GW with id_token ' + id_token)
 
             _self.http
-                .put<any>([appVariables.APIG_ENDPOINT, 'devices',  path].join('/'),  {
+                .put<any>([appVariables.APIG_ENDPOINT, 'devices',  path].join('/'), type, {
                     headers: new HttpHeaders().set('Authorization', id_token)
                 })
                 .toPromise()
