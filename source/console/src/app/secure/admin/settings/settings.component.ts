@@ -20,7 +20,7 @@ declare var swal: any;
 export class SettingsComponent implements OnInit { // implements LoggedInCallback {
 
     public title: string = 'System Settings';
-    public isAdminUser: boolean = false;
+    public isAdminUser: boolean = true;  //bypass admin user check.
     public deviceStats: any = {};
     public appConfig: Setting = new Setting();
     public appConfigError: boolean = false;
@@ -54,25 +54,33 @@ export class SettingsComponent implements OnInit { // implements LoggedInCallbac
         });
 
         console.log('get profile');
-        this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
-            _self.profile = new ProfileInfo(profile);
-            _self.isAdminUser = _self.profile.isAdmin();
-            _self.loadAllSettings();
-        });
-
+        // this.localStorage.getItem<ProfileInfo>('profile').subscribe((profile) => {
+        //     _self.profile = new ProfileInfo(profile);
+        //     _self.isAdminUser = _self.profile.isAdmin();
+        //     _self.loadAllSettings();
+        // });
+        _self.loadAllSettings();
     }
 
     loadAllSettings() {
         const _self = this;
         console.log('loadallsetting...');
-        if (this.profile.isAdmin()) {
-            this.loadGeneralSettings().then((data) => {
-                _self.loadEngineSettings().then((data2) => {
-                    _self.loadAutoSettings().then((data3) => {
-                    });
+        // if (this.profile.isAdmin()) {
+        //     this.loadGeneralSettings().then((data) => {
+        //         _self.loadEngineSettings().then((data2) => {
+        //             _self.loadAutoSettings().then((data3) => {
+        //             });
+        //         });
+        //     });
+        // }
+        
+        //bypass admin user check. 
+        this.loadGeneralSettings().then((data) => {
+            _self.loadEngineSettings().then((data2) => {
+                _self.loadAutoSettings().then((data3) => {
                 });
             });
-        }
+        });
     }
 
     loadGeneralSettings(): Promise<any> {
